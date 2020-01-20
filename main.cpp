@@ -247,5 +247,23 @@ int main()
         generateABC_n(6);
         enhanceGenerateABC_n(7);
     }
+
+    /* min, max, minmax, min_element, max_element & minmax_element */
+    {
+        vector<int> v = {3, 1, 5, 4, 2};
+        auto [min_, max_] = minmax_element(begin(v), end(v));
+        auto p = minmax_element(begin(v), end(v));
+        cout << "(min, max): (" << *p.fi << ", " << *p.se << ")"
+             << "\t(" << *min_ << ", " << *max_ << ")" << endl;
+        auto max2 = *max_element(all(v));
+        cout << "Max is " << max2 << endl;
+        auto min2 = *min_element(all(v));
+        cout << "Min is " << min2 << endl;
+        auto min3 = min(4, 6);
+        auto max3 = max(4, 6);
+        cout << "Min is " << min3 << endl;
+        cout << "Max is " << max3 << endl;
+    }
+
     return 0;
 }
