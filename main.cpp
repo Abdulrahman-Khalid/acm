@@ -32,7 +32,21 @@ ll powmod(ll a, ll b)
 ll gcd(ll a, ll b) { return b ? gcd(b, a % b) : a; }
 typedef pair<ll, ll> PLL;
 
-auto reverse_order = [](const auto &a, const auto &b) { return a > b; };
+auto reverse_order = [](const auto &a, const auto &b) { return a > b; }; //lambda func
+
+template <typename T>
+void print(T &a)
+{
+    cout << a << " ";
+}
+
+template <typename T>
+void forEach(vector<T> &vec, void (*func)(T &) = print)
+{
+    for (auto &val : vec)
+        func(val);
+}
+
 int main()
 {
     ios::sync_with_stdio(0);
@@ -40,8 +54,12 @@ int main()
     //sort & stable_sort
     VI v{1, 5, 5, 2, 10, 20};
     sort(all(v));
+    forEach(v, print);
+    cout << endl;
     cout << (binary_search(all(v), 5) ? "Found" : "Not Found") << endl;
     stable_sort(all(v), reverse_order); // greater<int>() or lambda func
+    forEach(v);
+    cout << endl;
     cout << (binary_search(all(v), 5, greater<int>()) ? "Found" : "Not Found") << endl;
     return 0;
 }
