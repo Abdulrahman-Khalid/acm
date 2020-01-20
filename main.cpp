@@ -42,7 +42,7 @@ void print(T &a)
 }
 
 template <typename T>
-void forEach(vector<T> &vec, void (*func)(T &) = print)
+void forEach(vector<T> &vec, void (*func)(T &) = print) // to pass lambda const function<void(int)>& func
 {
     for (auto &val : vec)
         func(val);
