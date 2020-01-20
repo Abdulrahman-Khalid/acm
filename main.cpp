@@ -1,4 +1,5 @@
 #include <bits/stdc++.h>
+#include <functional>
 using namespace std;
 
 #define rep(i, a, n) for (int i = a; i < n; i++)
@@ -61,5 +62,11 @@ int main()
     forEach(v);
     cout << endl;
     cout << (binary_search(all(v), 5, greater<int>()) ? "Found" : "Not Found") << endl;
+    //lambda function
+    int capture = 4;
+    auto lambda = [capture](int input) mutable { capture = 5; return capture + input; };
+    // mutable because capute is captured by value and I assigned it inside the lambda function
+    // [=] capture all by value, [&] capture all by refrence
+    cout << "lambda output: " << lambda(2) << endl;
     return 0;
 }
