@@ -47,6 +47,7 @@ void forEach(vector<T> &vec, void (*func)(T &) = print) // to pass lambda const 
 {
     for (auto &val : vec)
         func(val);
+    cout << endl;
 }
 
 template <typename ForwardIterator, typename T>
@@ -76,8 +77,18 @@ int main()
 
     stable_sort(all(v), reverse_order); // greater<int>() or lambda func //complexity: o(nlogn)
     forEach(v);
-    cout << endl;
     cout << "Binary Search: " << (binary_search(all(v), 5, reverse_order) ? "Found" : "Not Found") << endl; //complexity: o(logn)
+
+    reverse(all(v));
+    forEach(v);
+
+    VI vCpy(6);
+    reverse_copy(all(v), vCpy.begin());
+    forEach(vCpy);
+
+    //rotate(v.begin(), v.begin() + 2, v.end());
+    rotate_copy(v.begin(), v.begin() + 2, v.end(), vCpy.begin());
+    forEach(vCpy);
 
     /* lambda function */
     int capture = 4;
@@ -93,6 +104,20 @@ int main()
         int ad = 2;
     }
 
-    //
+    /* all_of, any_of, none_of*/
+    auto is_even = [](auto a) { return a % 2 == 0; };
+    bool noneEven = none_of(v.begin(), v.end(), is_even);
+    bool anyEven = any_of(v.begin(), v.end(), is_even);
+    bool allEven = all_of(v.begin(), v.end(), is_even);
+    cout << "All even: " << (allEven ? "True" : "False") << endl;   // true if all true
+    cout << "Any even: " << (anyEven ? "True" : "False") << endl;   // true if any true
+    cout << "None even: " << (noneEven ? "True" : "False") << endl; // true if none true (all false)
+
+    /*  std::partial_sum & std::iota */
+    VI a(5), b(5), c(5);
+    iota(all(a), 1);                // 1, 2, 3, 4 ,5
+    partial_sum(all(a), b.begin()); //default plus<>()
+    partial_sum(all(a), c.begin(), multiplies<>());
+    forEach(a), forEach(b), forEach(c);
     return 0;
 }
