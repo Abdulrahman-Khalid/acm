@@ -261,8 +261,10 @@ int main()
         cout << "Min is " << min2 << endl;
         auto min3 = min(4, 6);
         auto max3 = max(4, 6);
+        auto p2 = minmax(4, 6);
         cout << "Min is " << min3 << endl;
         cout << "Max is " << max3 << endl;
+        cout << "(min, max): (" << p2.fi << ", " << p2.se << ")" << endl;
     }
 
     return 0;
