@@ -7,6 +7,7 @@ using namespace std;
 #define pb push_back
 #define mp make_pair
 #define all(x) (x).begin(), (x).end()
+#define rall(x) (x).rbegin(), (x).rend()
 #define fi first
 #define se second
 #define SZ(x) ((int)(x).size())
@@ -48,28 +49,50 @@ void forEach(vector<T> &vec, void (*func)(T &) = print) // to pass lambda const 
         func(val);
 }
 
+template <typename ForwardIterator, typename T>
+ForwardIterator first_less_than(ForwardIterator first, ForwardIterator last, T value)
+{
+    auto it = lower_bound(first, last, value);
+    return it == first ? last : --it;
+}
+
 int main()
 {
     ios::sync_with_stdio(0);
     cin.tie(0);
     //sort & stable_sort
     VI v{1, 5, 5, 2, 10, 20};
-    sort(all(v));
+    sort(all(v)); //complexity: o(nlogn)
     forEach(v, print);
     cout << endl;
-    cout << (binary_search(all(v), 5) ? "Found" : "Not Found") << endl;
-    stable_sort(all(v), reverse_order); // greater<int>() or lambda func
+    cout << "Binary Search: " << (binary_search(all(v), 5) ? "Found" : "Not Found") << endl;
+    auto it = lower_bound(all(v), 5); //first equal to or greater than //complexity: o(logn)
+    cout << "Lower Bound: " << (it != v.end() ? to_string(*it) : "Not Found") << endl;
+    cout << "Lower Bound Distance: " << distance(v.begin(), it) << endl;
+    it = upper_bound(all(v), 5); // first greater than //complexity: o(logn)
+    cout << "Upper Bound: " << (it != v.end() ? to_string(*it) : "Not Found") << endl;
+    it = first_less_than(all(v), 5); // first greater than //complexity: o(logn)
+    cout << "first less than: " << (it != v.end() ? to_string(*it) : "Not Found") << endl;
+
+    stable_sort(all(v), reverse_order); // greater<int>() or lambda func //complexity: o(nlogn)
     forEach(v);
     cout << endl;
-    cout << (binary_search(all(v), 5, greater<int>()) ? "Found" : "Not Found") << endl;
-    //lambda function
+    cout << "Binary Search: " << (binary_search(all(v), 5, reverse_order) ? "Found" : "Not Found") << endl; //complexity: o(logn)
+
+    /* lambda function */
     int capture = 4;
-    auto lambda = [capture](int input) mutable { capture = 5; return capture + input; };
+    auto lambda = [capture](int input) mutable {
+        capture = 5;
+        return capture + input; };
     // mutable because capute is captured by value and I assigned it inside the lambda function
     // [=] capture all by value, [&] capture all by refrence
     cout << "lambda output: " << lambda(2) << endl;
+
+    /* scope */
     {
         int ad = 2;
     }
+
+    //
     return 0;
 }
