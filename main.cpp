@@ -68,5 +68,8 @@ int main()
     // mutable because capute is captured by value and I assigned it inside the lambda function
     // [=] capture all by value, [&] capture all by refrence
     cout << "lambda output: " << lambda(2) << endl;
+    {
+        int ad = 2;
+    }
     return 0;
 }
