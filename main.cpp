@@ -1,7 +1,25 @@
 #include <bits/stdc++.h>
 #include <functional>
+#include <algorithm>
+#include <numeric>
 
 using namespace std;
+
+// namespace my
+// {
+// template <class InIt, class T>
+// auto count(InIt first, InIt last, const T &val)
+// {
+//     return std::reduce(first, last, 0, [val](auto i, auto e) { return i + (val == e); });
+// }
+
+// template <class I, class P>
+// auto any_of(I f, I l, P p)
+// {
+//     return std::reduce(f, l, false,
+//                        [p](auto a, auto b) { return a || p(b); });
+// }
+// } // namespace my
 
 #define rep(i, a, n) for (int i = a; i < n; i++)
 #define per(i, a, n) for (int i = n - 1; i >= a; i--)
@@ -57,15 +75,6 @@ ForwardIterator first_less_than(ForwardIterator first, ForwardIterator last, T v
     auto it = lower_bound(first, last, value);
     return it == first ? last : --it;
 }
-
-// namespace my
-// {
-// template <class InIt, class T>
-// auto count(InIt first, InIt last, const T &val)
-// {
-//     return std::reduce(first, last, 0, [val](auto i, auto e) { return i + (val == e); });
-// }
-// } // namespace my
 
 int main()
 {
@@ -251,7 +260,8 @@ int main()
     /* min, max, minmax, min_element, max_element & minmax_element */
     {
         vector<int> v = {3, 1, 5, 4, 2};
-        auto [min_, max_] = minmax_element(begin(v), end(v));
+        auto [min_, max_] = minmax_element(begin(v), end(v)); // C++17 Structured Bindings
+        // min_ = 0; // compile error: assignment of read-only reference ‘min_’
         auto p = minmax_element(begin(v), end(v));
         cout << "(min, max): (" << *p.fi << ", " << *p.se << ")"
              << "\t(" << *min_ << ", " << *max_ << ")" << endl;
@@ -267,5 +277,18 @@ int main()
         cout << "(min, max): (" << p2.fi << ", " << p2.se << ")" << endl;
     }
 
+    /* std::unique & std::unique_copy */
+    {
+        VI v = {1, 2, 2, 3, 3, 1, 2, 2};
+        VI u(v);
+        v.erase(unique(begin(v), end(v)), end(v)); // remove any duplicate adjacent elements
+        forEach(v);
+        sort(all(v));
+        v.erase(unique(begin(v), end(v)), end(v));
+        forEach(v);
+        // equal_to<>() not_equal_to<>() greater<>() less<>() greater_equal<>() less_equal<>()
+        u.erase(unique(all(u), greater<>()), end(u)); // remove if element of the left is greater than me
+        forEach(u);
+    }
     return 0;
 }
