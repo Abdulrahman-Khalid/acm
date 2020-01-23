@@ -151,52 +151,53 @@ int main()
 {
     ios::sync_with_stdio(0);
     cin.tie(0);
-    /*Question (1)*/
-    // {
-    //     int n;
-    //     cin >> n;
-    //     VI res = distinctPrimes();
-    //     while (n--)
-    //     {
-    //         int x;
-    //         cin >> x;
-    //         cout << res[x] << endl;
-    //     }
-    // }
+    /*Question (1) [Distinct Primes]*/
+    {
+        int n;
+        cin >> n;
+        VI res = distinctPrimes();
+        while (n--)
+        {
+            int x;
+            cin >> x;
+            cout << res[x] << endl;
+        }
+    }
 
-    /*Question (2)*/
-    // {
-    //     int n, k;
-    //     cin >> n >> k;
-    //     cout << noldbach(n, k) << endl;
-    // }
+    /*Question (2) [Noldbach problem]*/
+    {
+        int n, k;
+        cin >> n >> k;
+        cout << noldbach(n, k) << endl;
+    }
 
-    /*Question (3)*/
-    // {
-    //     int n;
-    //     vector<ll> inputs;
-    //     cin >> n;
-    //     inputs.push_back(n);
-    //     ll max = n;
-    //     while (cin >> n)
-    //     {
-    //         if (n > max)
-    //             max = n;
-    //         inputs.push_back(n);
-    //     }
-    //     sieve(max);
-    //     loop(i, 0, inputs.size())
-    //     {
-    //         vector<ll> ans = primeFact(inputs[i]);
-    //         int sz = SZ(ans) - 1;
-    //         loop(j, 0, sz)
-    //         {
-    //             cout << ans[j] << " x ";
-    //         }
-    //         cout << ans[sz] << endl;
-    //     }
-    // }
+    /*Question (3) [Medium Factorization]*/
+    {
+        int n;
+        vector<ll> inputs;
+        cin >> n;
+        inputs.push_back(n);
+        ll max = n;
+        while (cin >> n)
+        {
+            if (n > max)
+                max = n;
+            inputs.push_back(n);
+        }
+        sieve(max);
+        loop(i, 0, inputs.size())
+        {
+            vector<ll> ans = primeFact(inputs[i]);
+            int sz = SZ(ans) - 1;
+            loop(j, 0, sz)
+            {
+                cout << ans[j] << " x ";
+            }
+            cout << ans[sz] << endl;
+        }
+    }
 
+    /*Question (4) [Power of Large Numbers]*/
     {
         string a, b;
         int n;
