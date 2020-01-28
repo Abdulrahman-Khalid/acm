@@ -146,7 +146,7 @@ int main()
         cout << endl
              << "std::partial_sum & std::iota" << endl;
         VI a(5), b(5), c(5);
-        iota(all(a), 2);                                // 1, 2, 3, 4 ,5 // fill vector starting from the value
+        iota(all(a), 2);                                // 2, 3, 4 ,5, 6 // fill vector starting from the value
         partial_sum(all(a), b.begin());                 //default plus<>() // current element in (a) plus the previous in (b)
         partial_sum(all(a), c.begin(), multiplies<>()); // current element in (a) * the previous in (c)
         forEach(a), forEach(b), forEach(c);
@@ -281,6 +281,9 @@ int main()
     {
         VI v = {1, 2, 2, 3, 3, 1, 2, 2};
         VI u(v);
+        VI vv;
+        cout << "HI";
+        forEach(vv);
         v.erase(unique(begin(v), end(v)), end(v)); // remove any duplicate adjacent elements
         forEach(v);
         sort(all(v));
