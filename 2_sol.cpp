@@ -25,7 +25,7 @@ mt19937 mrand(random_device{}());
 const ll mod = 1000000007;
 int rnd(int x) { return mrand() % x; }
 
-ll mulmod(ll a, ll b, ll m = mod)
+ll mulmod(ll a, ll b, ll m = mod) // log(n)
 {
     ll res = 0;
     while (b)
@@ -58,7 +58,7 @@ ll powmod(ll a, ll b, ll m = mod)
     for (; b; b >>= 1)
     {
         if (b & 1)
-            res = ((__int128)res * a) % m;
+            res = ((__int128)res * a) % m; // multiplication o(1)
         a = ((__int128)a * a) % m;
     }
     return res;
@@ -128,10 +128,12 @@ void modGCD()
     if (a == b)
     {
         cout << (powmod(a, n) + powmod(b, n)) % mod << '\n';
+        // cout << (powmodWithMulmod(a, n) + powmodWithMulmod(b, n)) % mod << '\n';
     }
     else
     {
         ll d = (powmod(a, n, a - b) + powmod(b, n, a - b)) % (a - b);
+        // ll d = (powmodWithMulmod(a, n, a - b) + powmodWithMulmod(b, n, a - b)) % (a - b);
         cout << gcd(d, a - b) << '\n';
     }
 }
